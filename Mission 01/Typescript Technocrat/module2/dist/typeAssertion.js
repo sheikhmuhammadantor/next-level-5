@@ -1,13 +1,13 @@
 "use strict";
 {
-    // 
+    //
     let anything = "hello !";
     // anything = (77 as string);
     let num1 = anything;
     console.log(num1);
     // Function
     const kgToGm = (value) => {
-        if (typeof value === 'string') {
+        if (typeof value === "string") {
             const convertedValue = parseFloat(value) * 1000;
             return `The Value Is : ${convertedValue}`;
         }
