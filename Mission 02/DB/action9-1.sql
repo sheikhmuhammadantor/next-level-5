@@ -29,3 +29,19 @@
 
 -- SELECT extract(MONTH from '2002-03-30'::date);
 -- SELECT 'n'::BOOLEAN;
+
+-- Module 9.2;
+-- SELECT * FROM students;
+
+-- SELECT country, count(*), avg(age) from students
+--     GROUP BY country;
+
+-- SELECT country, avg(age) from students
+--     GROUP BY country
+--         HAVING avg(age) > 20.60;
+
+-- SELECT extract(YEAR FROM dob) as unique_birth_year,
+--  count(*) as born_count
+--     FROM students 
+--     GROUP BY unique_birth_year
+--     HAVING  count(*) > 3;
