@@ -5,3 +5,7 @@ export interface IUser {
   password: string;
   role: "user" | "admin";
 }
+
+export interface UserInstanceMethods {
+  hasPassword(password: string): string;
+}
