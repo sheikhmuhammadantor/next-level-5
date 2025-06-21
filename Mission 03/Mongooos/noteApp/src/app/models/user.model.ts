@@ -1,8 +1,12 @@
 import bcrypt from "bcryptjs";
-import { Model, model, Schema } from "mongoose";
-import { IUser, UserInstanceMethods } from "../interfaces/user.interface";
+import { model, Schema } from "mongoose";
+import {
+  IUser,
+  UserInstanceMethods,
+  UserStaticMethods,
+} from "../interfaces/user.interface";
 
-const userSchema = new Schema<IUser, Model<IUser>, UserInstanceMethods>(
+const userSchema = new Schema<IUser, UserStaticMethods, UserInstanceMethods>(
   {
     firstName: {
       type: String,
@@ -36,10 +40,21 @@ const userSchema = new Schema<IUser, Model<IUser>, UserInstanceMethods>(
   }
 );
 
-userSchema.method("hasPassword", async function (plainPassword: string) {
+userSchema.method(
+  "hasPasswordInstance",
+  async function (plainPassword: string) {
+    // const password = await bcrypt.hash(plainPassword, 10);
+    // this.password = password;
+    // this.save();
+
+    const password = await bcrypt.hash(plainPassword, 10);
+    return password;
+  }
+);
+
+userSchema.static("hasPasswordStatic", async function (plainPassword: string) {
   const password = await bcrypt.hash(plainPassword, 10);
-  this.password = password;
-  return this.save();
+  return password;
 });
 
-export const User = model("User", userSchema);
+export const User = model<IUser, UserStaticMethods>("User", userSchema);

@@ -1,3 +1,5 @@
+import { Model } from "mongoose";
+
 export interface IUser {
   firstName: string;
   lastName: string;
@@ -7,5 +9,9 @@ export interface IUser {
 }
 
 export interface UserInstanceMethods {
-  hasPassword(password: string): string;
+  hasPasswordInstance(password: string): string;
+}
+
+export interface UserStaticMethods extends Model<IUser> {
+  hasPasswordStatic(password: string): string;
 }

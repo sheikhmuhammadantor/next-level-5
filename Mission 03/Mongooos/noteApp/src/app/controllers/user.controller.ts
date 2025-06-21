@@ -6,8 +6,11 @@ export const usersRoutes = express.Router();
 usersRoutes.post("/create-user", async (req: Request, res: Response) => {
   const body = req.body;
 
+  const password = await User.hasPasswordStatic(body.password);
+  body.password = password;
+
   const user = await User.create(body);
-  await user.hasPassword(body.password);
+  // await user.hasPassword(body.password);
 
   res.status(201).json({
     success: true,
