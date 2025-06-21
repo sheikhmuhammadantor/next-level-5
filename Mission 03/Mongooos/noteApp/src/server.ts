@@ -1,15 +1,16 @@
+import dotenv from "dotenv";
 import { Server } from "http";
 import mongoose from "mongoose";
 import app from "./app";
 
-// let server: Server;
+dotenv.config();
+
 const PORT = 5000;
+const uri = process.env.MONGO_URI;
 
 async function main() {
   try {
-    await mongoose.connect(
-      `mongodb+srv://shakeantor551:BtvPeJxptrfcHbeV@nextlevel5.8luvigt.mongodb.net/mongoose-note-app?retryWrites=true&w=majority&appName=NextLevel5`
-    );
+    await mongoose.connect(`${uri}`);
     console.log("Connected to MongoDB Using Mongoose!!");
 
     let server: Server = app.listen(PORT, () => {
